@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TTGenerator.Models.Add_faculty
+@using (Html.BeginForm("Add_faculty","Home",FormMethod.Post))
+{
+  <table border="1">
+      <thead>
+      <tr>
+         <td>Faculty Name</td>
+         <td>Course Id</td>
+         <td>Year</td>
+         <td>Batch</td>
+         <td>Section</td>
+         <td>Semester</td>
+     </tr>
+      </thead>
+      <tbody>
+         <tr>
+                <td>
+                    @Html.DropDownListFor(model=>model.Faculty_id,new SelectList(Model.FacultyCollection,"Faculty_Id","Faculty_Name"), "SelectFaculty")</td>
+                <td>@Html.DropDownListFor(model=>model.Course_id,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+             <td>
+             <select id="year" asp-for="Year">
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+            </select>
+             </td>    
+              <td>  
+                     <input type="number" id="batch_start_year" asp-for="Batch"/>
+              </td>
+              <td>
+                  <select id="sec" asp-for="section">
+                      <option value="a">a</option>
+                        <option value="b">b</option>
+                        <option value="c">c</option>
+                        <option value="d">d</option>
+                  </select>
+              </td>
+              <td>
+                     <select id="semester" asp-for="Semester">
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                    </select>
+              </td>
+              <td>
+                  <input type="submit"/>
+              </td>
+             </tr>
+
+      </tbody>
+
+    
+  </table>
+}

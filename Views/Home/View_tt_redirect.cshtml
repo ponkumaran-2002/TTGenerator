@@ -1,0 +1,313 @@
+﻿@model IEnumerable<TTGenerator.Models.Domain.clg_tt_level>
+<html>
+<body>
+    <h1>Hello</h1>
+    <table border="1s">
+        <tr>
+            <th>Day/Hour</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+        </tr>
+        @{
+            if (Model != null)
+            {
+                var mon = new List<string>();
+                var tue = new List<string>();
+                var wed = new List<string>();
+                var thr = new List<string>();
+                var fri = new List<string>();
+                var sat = new List<string>();
+                foreach (var data in Model)
+                {  
+                    if (data.day_tt == "monday")
+                    {  if(data.elective_id==101)
+                        {
+                            mon.Add("AE");                            
+                        }
+                        else if(data.elective_id==102)
+                        {
+                            mon.Add("OE");
+                        }
+                        else if(data.elective_id==103)
+                        {
+                            mon.Add("FT");
+                        }
+                        else if(data.elective_id==104)
+                        {
+                            mon.Add("PET");
+                        }
+                        else if (data.elective_id == 105)
+                        {
+                            mon.Add("Honors");
+                        }
+                        else if(data.elective_id==106)
+                        {
+                            mon.Add("Core-Sub");
+                        }
+                        else if(data.elective_id==107)
+                        {
+                            mon.Add("Cancel");
+                        }
+                        else
+                        {
+                            mon.Add("Core-Elec");
+                        }
+                        
+
+                    }
+                    else if (data.day_tt == "tuesday")
+                    {
+                        if (data.elective_id == 101)
+                        {
+                            tue.Add("AE");
+                        }
+                        else if (data.elective_id == 102)
+                        {
+                            tue.Add("OE");
+                        }
+                        else if (data.elective_id == 103)
+                        {
+                            tue.Add("FT");
+                        }
+                        else if (data.elective_id == 104)
+                        {
+                            tue.Add("PET");
+                        }
+                        else if (data.elective_id == 105)
+                        {
+                            tue.Add("Honors");
+                        }
+                        else if (data.elective_id == 106)
+                        {
+                            tue.Add("Core-Sub");
+                        }
+                        else if (data.elective_id == 107)
+                        {
+                            tue.Add("Cancel");
+                        }
+                        else
+                        {
+                            tue.Add("Core-Elec");
+                        }
+
+
+                    }
+                    else if (data.day_tt == "wednesday")
+                    {
+                        if (data.elective_id == 101)
+                        {
+                            wed.Add("AE");
+                        }
+                        else if (data.elective_id == 102)
+                        {
+                            wed.Add("OE");
+                        }
+                        else if (data.elective_id == 103)
+                        {
+                            wed.Add("FT");
+                        }
+                        else if (data.elective_id == 104)
+                        {
+                            wed.Add("PET");
+                        }
+                        else if (data.elective_id == 105)
+                        {
+                            wed.Add("Honors");
+                        }
+                        else if (data.elective_id == 106)
+                        {
+                            wed.Add("Core-Sub");
+                        }
+                        else if (data.elective_id == 107)
+                        {
+                            wed.Add("Cancel");
+                        }
+                        else
+                        {
+                            wed.Add("Core-Elec");
+                        }
+
+                    }
+                    else if (data.day_tt == "thursday")
+                    {
+                        if (data.elective_id == 101)
+                        {
+                            thr.Add("AE");
+                        }
+                        else if (data.elective_id == 102)
+                        {
+                            thr.Add("OE");
+                        }
+                        else if (data.elective_id == 103)
+                        {
+                            thr.Add("FT");
+                        }
+                        else if (data.elective_id == 104)
+                        {
+                            thr.Add("PET");
+                        }
+                        else if (data.elective_id == 105)
+                        {
+                            thr.Add("Honors");
+                        }
+                        else if (data.elective_id == 106)
+                        {
+                            thr.Add("Core-Sub");
+                        }
+                        else if (data.elective_id == 107)
+                        {
+                            thr.Add("Cancel");
+                        }
+                        else
+                        {
+                            thr.Add("Core-Elec");
+                        }
+
+                    }
+                    else if (data.day_tt == "friday")
+                    {
+                        if (data.elective_id == 101)
+                        {
+                            fri.Add("AE");
+                        }
+                        else if (data.elective_id == 102)
+                        {
+                            fri.Add("OE");
+                        }
+                        else if (data.elective_id == 103)
+                        {
+                            fri.Add("FT");
+                        }
+                        else if (data.elective_id == 104)
+                        {
+                            fri.Add("PET");
+                        }
+                        else if (data.elective_id == 105)
+                        {
+                            fri.Add("Honors");
+                        }
+                        else if (data.elective_id == 106)
+                        {
+                            fri.Add("Core-Sub");
+                        }
+                        else if (data.elective_id == 107)
+                        {
+                            fri.Add("Cancel");
+                        }
+                        else
+                        {
+                            fri.Add("Core-Elec");
+                        }
+                    }
+                    else
+                    {
+                        if (data.elective_id == 101)
+                        {
+                            sat.Add("AE");
+                        }
+                        else if (data.elective_id == 102)
+                        {
+                            sat.Add("OE");
+                        }
+                        else if (data.elective_id == 103)
+                        {
+                            sat.Add("FT");
+                        }
+                        else if (data.elective_id == 104)
+                        {
+                            sat.Add("PET");
+                        }
+                        else if (data.elective_id == 105)
+                        {
+                            sat.Add("Honors");
+                        }
+                        else if (data.elective_id == 106)
+                        {
+                            sat.Add("Core-Sub");
+                        }
+                        else if (data.elective_id == 107)
+                        {
+                            sat.Add("Cancel");
+                        }
+                        else
+                        {
+                            sat.Add("Core-Elec");
+                        }
+                    }
+                }
+                for(int i=0;i<6;i++)
+                {
+                    if(i==0)
+                    {
+                        <tr>
+                        <td>Monday</td>
+                        @foreach(var mem in mon)
+                        {
+                           <td>@mem</td>       
+                         }
+                        </tr>
+                    }
+                     if(i==1)
+                    {
+                        <tr>
+                        <td>Tuesday</td>
+                        @foreach(var mem in tue)
+                        {
+                           <td>@mem</td>       
+                         }
+                        </tr>
+                    }
+                    if (i == 2)
+                    {
+                        <tr>
+                            <td>Wednesday</td>
+                            @foreach(var mem in wed)
+                            {
+                                <td>@mem</td>
+                            }
+                        </tr>
+                    }
+                     if(i==3)
+                    {
+                        <tr>
+                        <td>Thursday</td>
+                        @foreach(var mem in thr)
+                        {
+                           <td>@mem</td>       
+                         }
+                        </tr>
+                    }
+                    if (i == 4)
+                    {
+                        <tr>
+                            <td>Friday</td>
+                            @foreach(var mem in fri)
+                            {
+                                <td>@mem</td>
+                            }
+                        </tr>
+                    }
+                     if(i==5)
+                    {
+                        <tr>
+                        <td>Saturday</td>
+                        @foreach(var mem in sat)
+                        {
+                           <td>@mem</td>       
+                         }
+                        </tr>
+                    }
+                }
+            } 
+          }
+</table>
+</body>
+</html>

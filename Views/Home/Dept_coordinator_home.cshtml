@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <nav>
+        <input type="button" value="Add Course Details" onclick="location.href='@Url.Action("Add_course_details", "Home" )'" />
+        <input type="button" value="Assign Subject to Staff" onclick="location.href='@Url.Action("Add_faculty", "Home" )'" />
+        <input type="button" value="Allocate Lab" onclick="location.href='@Url.Action("allotlab", "Home" )'" />
+    </nav>
+</body>
+</html>

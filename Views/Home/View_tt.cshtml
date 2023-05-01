@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model TTGenerator.Models.View_tt
+
+<html>
+
+<body>
+    <p>Note: First of All assign The TT for 1st year before assigning for others</p>
+    @using (Html.BeginForm("View_tt","Home",FormMethod.Post))
+    {
+    <label>
+        <h1>Year
+        <select id="year" asp-for="year_s">
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+        </select>
+        </h1>
+        <table id="table1">
+        </table>
+    </label>
+    <label>
+        <h1>Semester_id
+            <select id="semester" asp-for="semester_id">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+                <option value=8>8</option>
+             </select>
+        </h1>
+    </label>
+    <label>
+        <h1>
+            Batch_start_year
+            <input type="number" id="batch_start_year" asp-for="batch_start_year"/>
+        </h1>
+    </label>
+    <input type="submit"/>
+    }
+</body>
+</html>

@@ -1,0 +1,549 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model TTGenerator.Models.Index1
+<html>
+
+<body>
+    <p>Note: First of All assign The TT for 1st year before assigning for others</p>
+    @using (Html.BeginForm("Index1","Home",FormMethod.Post))
+    {
+    <label>
+        <h1>Year
+        <select id="year" asp-for="year_s" onchange="showTable()">
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+        </select>
+        </h1>
+        <table id="table1">
+
+
+        </table>
+    </label>
+    <label>
+        <h1>Semester_id
+            <select id="semester" asp-for="semester_id">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+                <option value=8>8</option>
+             </select>
+        </h1>
+    </label>
+    <label>
+        <h1>
+            Batch_start_year
+            <input type="number" id="batch_start_year" asp-for="batch_start_year"/>
+        </h1>
+    </label>
+    <h1>
+        <!--Succuess-->
+        <table border="2">
+            <thead>
+                <th>Day/Hour</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Monday</th>
+                    <th value="1">
+                        <select id="m1" asp-for="m1">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m2" asp-for="m2">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m3" asp-for="m3">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m4" asp-for="m4">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m5" asp-for="m5">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m6" asp-for="m6">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m7" asp-for="m7">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m8" asp-for="m8">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m9" asp-for="m9">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="m10" asp-for="m10">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+
+                </tr>
+                <tr>
+                    <th>Tuesday</th>
+                    <th>
+                        <select id="t1" asp-for="t1">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t2" asp-for="t2">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t3" asp-for="t3">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t4" asp-for="t4">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t5" asp-for="t5">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t6" asp-for="t6">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t7" asp-for="t7">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t8" asp-for="t8">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t9" asp-for="t9">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="t10" asp-for="t10">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Wednesday</th>
+                    <th>
+                        <select id="w1" asp-for="w1">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w2" asp-for="w2">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w3" asp-for="w3">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w4" asp-for="w4">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w5" asp-for="w5">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w6" asp-for="w6">                           
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w7" asp-for="w7">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w8" asp-for="w8">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w9" asp-for="w9">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="w10" asp-for="w10">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Thursday</th>
+                    <th>
+                        <select id="th1" asp-for="th1">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th2" asp-for="th2">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th3" asp-for="th3">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th4" asp-for="th4">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th5" asp-for="th5">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th6" asp-for="th6">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th7" asp-for="th7">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th8" asp-for="th8">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th9" asp-for="th9">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="th10" asp-for="th10">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Friday</th>
+                    <th>
+                        <select id="f1" asp-for="f1">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th >
+                            <select id ="f2" asp-for="f2">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th >
+                            <select id="f3" asp-for="f3">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="f4"  asp-for="f4">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="f5" asp-for="f5">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="f6" asp-for="f6">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="f7" asp-for="f7">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="f8" asp-for="f8">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="f9" asp-for="f9">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="f10" asp-for="f10">
+                            <option value=107>    </option>
+                            <option value=103>Fastrack</option>
+                            <option value=105>Honours</option>
+                        </select>
+                    </th>
+                </tr>
+                 <tr>
+                    <th>Saturday</th>
+                    <th>
+                        <select id="s1" asp-for="s1">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="s2" asp-for="s2">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="s3" asp-for="s3">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="s4" asp-for="s4">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="s5" asp-for="s5">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="s6" asp-for="s6">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="s7" asp-for="s7">
+                            <option value=106>    </option>
+                            <option value=101>Allied Elective</option>
+                            <option value=102>Open Elective</option>
+                            <option value=104>PET</option>
+                        </select>
+                    </th>                      
+                        <th>
+                            <select id="s8" asp-for="s8">
+                                <option value=107>    </option>
+                            </select>
+                        </th>
+                        <th>
+                            <select id="s9" asp-for="s9">
+                                <option value=107>    </option>
+                            </select>
+                        </th>
+                        <th>
+                            <select id="s10" asp-for="s10">
+                                <option value=107>    </option>
+                            </select>
+                        </th>
+                </tr>
+            </tbody>
+        </table>
+    </h1>
+    <input type="submit"/>   
+}
+</body>
+</html>

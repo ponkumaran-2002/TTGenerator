@@ -1,0 +1,995 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TTGenerator.Models.Allot_lab
+@using (Html.BeginForm("allotlab_redirect", "Home", FormMethod.Post))
+{
+    <table border="1">
+        <tbody>
+                <tr>
+                <th>Day/Hour</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                </tr>
+          
+                @{
+                    var elec = new int[] { 101,102,103,104,105,107,108};
+                    var mon = new List<string>();
+                    var tue = new List<string>();
+                    var wed = new List<string>();
+                    var thr = new List<string>();
+                    var fri = new List<string>();
+                    var sat = new List<string>();
+                    foreach(var data in Model.Opted_electives)
+                    {
+                        if (data.day_tt == "monday")
+                        {
+                            if (data.elective_id == 101)
+                            {
+                                mon.Add("AE");
+                            }
+                            else if (data.elective_id == 102)
+                            {
+                                mon.Add("OE");
+                            }
+                            else if (data.elective_id == 103)
+                            {
+                                mon.Add("FT");
+                            }
+                            else if (data.elective_id == 104)
+                            {
+                                mon.Add("PET");
+                            }
+                            else if (data.elective_id == 105)
+                            {
+                                mon.Add("Honors");
+                            }
+                            else if (data.elective_id == 106)
+                            {
+                                mon.Add("Core-Sub");
+                            }
+                            else if (data.elective_id == 107)
+                            {
+                                mon.Add("Cancel");
+                            }
+                            else
+                            {
+                                mon.Add("Core-Elec");
+                            }
+
+
+                        }
+                        else if (data.day_tt == "tuesday")
+                        {
+                            if (data.elective_id == 101)
+                            {
+                                tue.Add("AE");
+                            }
+                            else if (data.elective_id == 102)
+                            {
+                                tue.Add("OE");
+                            }
+                            else if (data.elective_id == 103)
+                            {
+                                tue.Add("FT");
+                            }
+                            else if (data.elective_id == 104)
+                            {
+                                tue.Add("PET");
+                            }
+                            else if (data.elective_id == 105)
+                            {
+                                tue.Add("Honors");
+                            }
+                            else if (data.elective_id == 106)
+                            {
+                                tue.Add("Core-Sub");
+                            }
+                            else if (data.elective_id == 107)
+                            {
+                                tue.Add("Cancel");
+                            }
+                            else
+                            {
+                                tue.Add("Core-Elec");
+                            }
+
+
+                        }
+                        else if (data.day_tt == "wednesday")
+                        {
+                            if (data.elective_id == 101)
+                            {
+                                wed.Add("AE");
+                            }
+                            else if (data.elective_id == 102)
+                            {
+                                wed.Add("OE");
+                            }
+                            else if (data.elective_id == 103)
+                            {
+                                wed.Add("FT");
+                            }
+                            else if (data.elective_id == 104)
+                            {
+                                wed.Add("PET");
+                            }
+                            else if (data.elective_id == 105)
+                            {
+                                wed.Add("Honors");
+                            }
+                            else if (data.elective_id == 106)
+                            {
+                                wed.Add("Core-Sub");
+                            }
+                            else if (data.elective_id == 107)
+                            {
+                                wed.Add("Cancel");
+                            }
+                            else
+                            {
+                                wed.Add("Core-Elec");
+                            }
+
+                        }
+                        else if (data.day_tt == "thursday")
+                        {
+                            if (data.elective_id == 101)
+                            {
+                                thr.Add("AE");
+                            }
+                            else if (data.elective_id == 102)
+                            {
+                                thr.Add("OE");
+                            }
+                            else if (data.elective_id == 103)
+                            {
+                                thr.Add("FT");
+                            }
+                            else if (data.elective_id == 104)
+                            {
+                                thr.Add("PET");
+                            }
+                            else if (data.elective_id == 105)
+                            {
+                                thr.Add("Honors");
+                            }
+                            else if (data.elective_id == 106)
+                            {
+                                thr.Add("Core-Sub");
+                            }
+                            else if (data.elective_id == 107)
+                            {
+                                thr.Add("Cancel");
+                            }
+                            else
+                            {
+                                thr.Add("Core-Elec");
+                            }
+
+                        }
+                        else if (data.day_tt == "friday")
+                        {
+                            if (data.elective_id == 101)
+                            {
+                                fri.Add("AE");
+                            }
+                            else if (data.elective_id == 102)
+                            {
+                                fri.Add("OE");
+                            }
+                            else if (data.elective_id == 103)
+                            {
+                                fri.Add("FT");
+                            }
+                            else if (data.elective_id == 104)
+                            {
+                                fri.Add("PET");
+                            }
+                            else if (data.elective_id == 105)
+                            {
+                                fri.Add("Honors");
+                            }
+                            else if (data.elective_id == 106)
+                            {
+                                fri.Add("Core-Sub");
+                            }
+                            else if (data.elective_id == 107)
+                            {
+                                fri.Add("Cancel");
+                            }
+                            else
+                            {
+                                fri.Add("Core-Elec");
+                            }
+                        }
+                        else
+                        {
+                            if (data.elective_id == 101)
+                            {
+                                sat.Add("AE");
+                            }
+                            else if (data.elective_id == 102)
+                            {
+                                sat.Add("OE");
+                            }
+                            else if (data.elective_id == 103)
+                            {
+                                sat.Add("FT");
+                            }
+                            else if (data.elective_id == 104)
+                            {
+                                sat.Add("PET");
+                            }
+                            else if (data.elective_id == 105)
+                            {
+                                sat.Add("Honors");
+                            }
+                            else if (data.elective_id == 106)
+                            {
+                                sat.Add("Core-Sub");
+                            }
+                            else if (data.elective_id == 107)
+                            {
+                                sat.Add("Cancel");
+                            }
+                            else
+                            {
+                                sat.Add("Core-Elec");
+                            }
+                        }
+                    }
+                    for(int i=0;i<6;i++)
+                    {
+                        if(i==0)
+                        {   <tr>
+                            <td>Monday</td>
+                            @for(int j=0;j<10;j++)
+                            {
+                                var l = j + 1;
+                                 var k = l.ToString();
+                                var m = "m" + k;
+                                Console.WriteLine(m);
+                                if (j == 0)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m1,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 1)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m2,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 2)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m3,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 3)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m4,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 4)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m5,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 5)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m6,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 6)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m7,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 7)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m8,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 8)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m9,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                                if (j == 9)
+                                {
+                                    if (mon[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.m10,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@mon[j]</td>
+                                    }
+                                }
+                            }
+                            </tr>
+                        }
+                        else if (i == 1)
+                        {   <tr>
+                            <td>Tuesday</td>
+                            @for (int j = 0; j < 10; j++)
+                            {
+                                var l = j + 1;                      
+                                var k = l.ToString();
+                                var m = "t" + k;
+                                if(j==0)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t1,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 1)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t2,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 2)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t3,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 3)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t4,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                 if(j==4)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t5,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 5)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t6,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 6)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t7,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 7)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t8,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 9)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t9,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                                if (j == 9)
+                                {
+                                    if (tue[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.t10,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@tue[j]</td>
+                                    }
+                                }
+                            }
+                            </tr>
+                        }
+                        else if (i == 2)
+                        {   <tr>
+                            <td>Wednesday</td>
+                            @for (int j = 0; j < 10; j++)
+                            {
+                                var l = j + 1;
+                                var k = l.ToString();
+                                var m = "w" + k;
+                                if (j == 0)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w1,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 1)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w2,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 2)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w3,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 3)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w4,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 4)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w5,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 5)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w6,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 6)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w7,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j ==7)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w8,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 8)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w9,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+                                if (j == 9)
+                                {
+                                    if (wed[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.w10,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@wed[j]</td>
+                                    }
+                                }
+
+                               
+                            }
+                            </tr>
+                        }
+                        else if (i == 3)
+                        {   <tr>
+                            <td>Thursday</td>
+                            @for (int j = 0; j < 10; j++)
+                            {
+                                var l = j + 1;
+                                var k = l.ToString();
+                                var m = "th" + k;
+                                if(j==0)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th1,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 1)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th2,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 2)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th3,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 3)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th4,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 4)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th5,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 5)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th6,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 6)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th7,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 7)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th8,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 8)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th9,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+                                if (j == 9)
+                                {
+                                    if (thr[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.th10,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@thr[j]</td>
+                                    }
+                                }
+
+                            }
+                            </tr>
+                        }
+                        else if (i == 4)
+                        {   <tr>
+                            <td>Friday</td>
+                            @for (int j = 0; j < 10; j++)
+                            {
+                                var l = j + 1;
+                                var k = l.ToString();
+                                var m = "f" + k;
+                                if(j==0)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f1,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 1)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f2,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 2)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f3,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 3)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f4,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 4)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f5,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if(j==5)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f6,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 6)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f7,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 7)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f8,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 8)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f9,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                                if (j == 9)
+                                {
+                                    if (fri[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.f10,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@fri[j]</td>
+                                    }
+                                }
+                            }
+                            </tr>
+                        }
+                        else
+                        {   <tr>
+                            <td>Saturdayday</td>
+                            @for (int j = 0; j < 10; j++)
+                            {
+                                var l = j + 1;
+                                var k = l.ToString();
+                                var m = "s" + k;
+                                if (j == 0)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s1,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 1)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s2,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 2)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s3,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 3)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s4,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 4)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s5,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 5)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s6,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 6)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s7,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 7)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s8,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 8)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s9,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+                                if (j == 9)
+                                {
+                                    if (sat[j] == "Core-Sub")
+                                    {
+                                        <td>@Html.DropDownListFor(model=>model.s10,new SelectList(Model.CourseCollection,"Course_Id","Course_Name"),"SelectCourse",new{@asp=@m})</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@sat[j]</td>
+                                    }
+                                }
+
+
+                            }
+                            </tr>
+                        }
+                    }
+
+                    }
+                }                
+        </tbody>
+
+    </table>
+        <input type="submit" />
+    
+}

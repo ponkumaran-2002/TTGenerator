@@ -1,0 +1,21 @@
+﻿@model TTGenerator.Models.Login
+<html>
+<body>
+    <h1>User Login</h1>
+    <form method="post" action="Home/Login">
+        <label>
+            Login:
+            <input type="text"  asp-for="login_id"/>
+        </label>
+        <br />
+        <br />
+        <label>
+            Password:
+            <input type="password" asp-for="password_l" />
+        </label>
+        <br />
+        <br />
+        <input type="submit" />
+    </form>
+</body>
+</html>
