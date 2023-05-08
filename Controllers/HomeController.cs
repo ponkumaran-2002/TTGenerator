@@ -15,6 +15,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Dynamic;
+using static System.Collections.Specialized.BitVector32;
+using System.Numerics;
+using System.Globalization;
+using MessagePack.Formatters;
 
 namespace TTGenerator.Controllers
 {
@@ -68,7 +72,8 @@ namespace TTGenerator.Controllers
                 T = acd.T,
                 P = acd.P,
                 C = acd.C,
-                Course_type = acd.Course_type
+                Course_type = acd.Course_type,
+                semester_id=acd.semester_id
             };
             mvcDemoDbContext.Course_details.Add(cd);
             mvcDemoDbContext.SaveChanges();
@@ -183,6 +188,8 @@ namespace TTGenerator.Controllers
         public async Task<IActionResult>Add_faculty(Add_faculty add_faculty)
         {
             Console.WriteLine(add_faculty.Faculty_id);
+            var fac = mvcDemoDbContext.Faculty_details.FromSqlRaw($"select * from [Faculty_details] where  faculty_id ='{_Myglobalfid}'").ToList();
+
             allot_faculty allotfac = new allot_faculty
             {
                      Faculty_id = add_faculty.Faculty_id,
@@ -190,7 +197,9 @@ namespace TTGenerator.Controllers
                      S_year = add_faculty.Year,
                      Batch = add_faculty.Batch,
                      Section=add_faculty.section,
-                     Semester=add_faculty.Semester
+                     Semester=add_faculty.Semester,
+                department = fac[0].faculty_dept
+
     };
             mvcDemoDbContext.allot_faculty.Add(allotfac);
             mvcDemoDbContext.SaveChanges();
@@ -240,6 +249,967 @@ namespace TTGenerator.Controllers
             Console.WriteLine(lab.Opted_electives.Count);
             Console.WriteLine(lab.Opted_electives[0].sno);
 
+        }
+        public IActionResult generate_initial()
+        {
+            return View();
+        }
+        public List<List<string>> retrive_data(string s_year,int batch_start_year,string section,int semester_id)
+        {
+            var fac = mvcDemoDbContext.Faculty_details.FromSqlRaw($"select * from [Faculty_details] where  faculty_id ='{_Myglobalfid}'").ToList();
+            var allot_fac = mvcDemoDbContext.allot_faculty.FromSqlRaw($"select * from [allot_faculty] where S_Year= '{s_year}' and Batch={batch_start_year} and section='{section}' and semester={semester_id} and department='{fac[0].faculty_dept}'").ToList();
+            var allot_lab = mvcDemoDbContext.allot_lab.FromSqlRaw($"select * from [allot_lab] where dept='{fac[0].faculty_dept}' and sec='{section}' and semester_id={semester_id} and year_s='{s_year}' and batch_start_year={batch_start_year}").ToList();
+            var clg_tt_level = mvcDemoDbContext.clg_tt_level.FromSqlRaw($"select * from [clg_tt_level] where batch_start_year={batch_start_year} and semester_id={semester_id} and year_s='{s_year}'").ToList();
+            var tt = mvcDemoDbContext.tt.FromSqlRaw($"select * from [tt] where department='{fac[0].faculty_dept}'");
+            List<List<string>> tt_temp = new List<List<string>>();
+            List<string> inner_tt1 = new List<string>();
+            List<string> inner_tt2 = new List<string>();
+            List<string> inner_tt3 = new List<string>();
+            List<string> inner_tt4 = new List<string>();
+            List<string> inner_tt5 = new List<string>();
+            List<string> inner_tt6 = new List<string>();
+            //Console.WriteLine(clg_tt_level.Count());
+            if (clg_tt_level != null)
+            {
+                for (int j = 0; j < clg_tt_level.Count(); j++)
+                {
+                    //Console.WriteLine(j);
+                    if (j >= 0 && j < 10)
+                    {
+                        if (clg_tt_level[j].elective_id != 106)
+                        {
+                            inner_tt1.Add(clg_tt_level[j].elective_id.ToString());
+                        }
+                        else
+                        {
+                            inner_tt1.Add("NA");
+                        }
+                    }
+                    else if (j >= 10 && j < 20)
+                    {
+                        if (clg_tt_level[j].elective_id != 106)
+                        {
+                            inner_tt2.Add(clg_tt_level[j].elective_id.ToString());
+                        }
+                        else
+                        {
+                            inner_tt2.Add("NA");
+                        }
+                    }
+                    else if (j >= 20 && j < 30)
+                    {
+                        if (clg_tt_level[j].elective_id != 106)
+                        {
+                            inner_tt3.Add(clg_tt_level[j].elective_id.ToString());
+                        }
+                        else
+                        {
+                            inner_tt3.Add("NA");
+                        }
+                    }
+                    else if (j >= 30 && j < 40)
+                    {
+                        if (clg_tt_level[j].elective_id != 106)
+                        {
+                            inner_tt4.Add(clg_tt_level[j].elective_id.ToString());
+                        }
+                        else
+                        {
+                            inner_tt4.Add("NA");
+                        }
+                    }
+                    else if (j >= 40 && j < 50)
+                    {
+                        if (clg_tt_level[j].elective_id != 106)
+                        {
+                            inner_tt5.Add(clg_tt_level[j].elective_id.ToString());
+                        }
+                        else
+                        {
+                            inner_tt5.Add("NA");
+                        }
+                    }
+                    else
+                    {
+                        if (clg_tt_level[j].elective_id != 106)
+                        {
+                            inner_tt6.Add(clg_tt_level[j].elective_id.ToString());
+                        }
+                        else
+                        {
+                            inner_tt6.Add("NA");
+                        }
+                    }
+
+                }
+            }
+            tt_temp.Add(inner_tt1);
+            tt_temp.Add(inner_tt2);
+            tt_temp.Add(inner_tt3);
+            tt_temp.Add(inner_tt4);
+            tt_temp.Add(inner_tt5);
+            tt_temp.Add(inner_tt6);
+
+            for (int i = 0; i < allot_lab.Count(); i++)
+            {
+
+                if (allot_lab[i].slot == 1 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][0] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 2 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][1] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 3 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][2] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 4 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][3] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 5 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][4] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 6 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][5] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 7 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][6] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 8 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][7] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 9 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][8] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 10 && allot_lab[i].day_tt == "monday")
+                {
+                    tt_temp[0][9] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 1 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][0] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 2 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][1] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 3 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][2] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 4 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][3] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 5 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][4] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 6 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][5] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 7 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][6] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 8 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][7] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 9 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][8] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 10 && allot_lab[i].day_tt == "tuesday")
+                {
+                    tt_temp[1][9] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 1 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][0] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 2 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][1] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 3 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][2] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 4 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][3] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 5 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][4] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 6 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][5] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 7 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][6] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 8 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][7] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 9 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][8] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 10 && allot_lab[i].day_tt == "wednesday")
+                {
+                    tt_temp[2][9] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 1 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][0] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 2 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][1] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 3 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][2] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 4 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][3] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 5 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][4] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 6 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][5] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 7 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][6] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 8 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][7] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 9 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][8] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 10 && allot_lab[i].day_tt == "thursday")
+                {
+                    tt_temp[3][9] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 1 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][0] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 2 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][1] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 3 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][2] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 4 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][3] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 5 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][4] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 6 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][5] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 7 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][6] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 8 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][7] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 9 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][8] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 10 && allot_lab[i].day_tt == "friday")
+                {
+                    tt_temp[4][9] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 1 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][0] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 2 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][1] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 3 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][2] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 4 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][3] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 5 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][4] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 6 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][5] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 7 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][6] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 8 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][7] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 9 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][8] = allot_lab[i].course_id;
+                }
+                if (allot_lab[i].slot == 10 && allot_lab[i].day_tt == "saturday")
+                {
+                    tt_temp[5][9] = allot_lab[i].course_id;
+                }
+            }
+            //Console.WriteLine(tt_temp[0][8]);
+            Console.WriteLine(allot_fac.Count());
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write(tt_temp[i][j] + '\t');
+                }
+                Console.WriteLine();
+            }
+            return tt_temp;
+        }
+        public bool check_consecutive_occurence(List<string> numbers,List<string>mat0)
+        {
+            //List<int> numbers = new List<int> { 1, 2, 2, 3, 4, 4, 4, 5, 6, 6 };
+
+            string previous_str = null;
+            int consecutiveCount = 0;
+
+            for (int i = 0; i < numbers.Count - 1; i++)
+            {
+                if (mat0.Contains(numbers[i])!=true )
+                {
+                    if (numbers[i]==previous_str)
+                    {
+                        consecutiveCount++;
+                    }
+                    else
+                    {
+                        consecutiveCount = 1;
+                    }
+                    previous_str = numbers[i];
+                    if (consecutiveCount >= 2)
+                    {
+                        Console.WriteLine("Cons Occurs AT" + i);
+                        return true;
+                    }
+                }
+            }
+            return false;
+
+        }
+       public bool check_period_collision_occur(List<List<string>> mat1,List<List<tt>> mat2)
+        {
+            for(int i=0;i<mat2.Count;i++)
+            {   List<List<string>> st1 = new List<List<string>>();
+                int l = 0; 
+                for(int j=0;j<6;j++)
+                {   List<string> st2=new List<string>();
+                    for(int k=0;k<10;k++)
+                    {   if(l>=60)
+                        {
+                            l = 0;
+                        }
+                        st2.Add(mat2[i][l].faculty_id.ToString());
+                    }
+                    st1.Add(st2);
+                }
+                for(int j=0;j<6;j++)
+                {
+                    for(int k=0;k<10;k++)
+                    {
+                        if (mat1[j][k]!="102"|| mat1[j][k] != "101" || mat1[j][k] != "104" || mat1[j][k] != "107" || mat1[j][k] != "103" || mat1[j][k] != "ss" || mat1[j][k] != "CE-1")
+                        {
+                            if (mat1[j][k] == st1[j][k])
+                            {
+                                return true;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+            }
+            return false;
+        }
+        public bool Check(List<List<string>> mat1,List<string>ommited_str,List<List<string>>mat2,List<List<tt>> mat3)
+        {
+            int flag = 1;
+            for(int i=0;i<6;i++)
+            {
+                if (check_consecutive_occurence(mat1[i], ommited_str) == true)
+                {
+                    Console.WriteLine("Checking Consecutive occurence"+i);
+                    
+                    return true;
+                }
+            }
+            if(check_period_collision_occur(mat2,mat3)==true)
+            {
+                    return true;
+            }
+            return false;
+
+        }
+       public List<List<string>>shuffle(List<List<string>> mat,List<string>mat0)
+       {
+            List<string> t1 = new List<string>();
+            List<int> fixedElements = new List<int>();
+            //List<int> shuffledElements = new List<int>();
+            for (int i = 0;i<6;i++)
+            {
+                for(int j=0;j<10;j++)
+                {
+                    if (mat0.Contains(mat[i][j])!=true)
+                    {
+                        t1.Add(mat[i][j]);
+                    }
+                }
+            }
+            Random random = new Random();
+            int n = t1.Count;
+            while(n>1)
+            {
+                n--;
+                int k=random.Next(n+1);
+                string value = t1[k];
+                t1[k] = t1[n];
+                t1[n] = value;
+            }
+            int coun = 0;
+            for(int i=0;i<6;i++)
+            {
+                for(int j=0;j<10;j++)
+                {  if(coun<t1.Count)
+                    {
+                        if (mat0.Contains(mat[i][j]) != true)
+                        {
+                            mat[i][j] = t1[coun];
+                            coun++;
+                        }
+
+                    }
+
+                }
+            }
+            return mat;
+        }
+        public string get_facultyid(string cid,List<allot_faculty>af)
+        {
+           string fac_id=cid;
+           for(int i=0;i<af.Count;i++)
+           {
+               if (af[i].Course_id!="107" && af[i].Course_id!="101" && af[i].Course_id!="102" && af[i].Course_id!="104" && af[i].Course_id!="ss" && af[i].Course_id!="103")
+                {
+                    if (af[i].Course_id==cid)
+                    {
+                        fac_id = af[i].Faculty_id;
+                    }
+                }
+           }
+            return fac_id;
+        }
+        public string get_fc(string cid,List<allot_faculty>af)
+        {    string fc_id=cid;
+            for(int i=0;i<af.Count;i++)
+            {
+                if (af[i].Course_id != "107" && af[i].Course_id != "101" && af[i].Course_id != "102" && af[i].Course_id != "104" && af[i].Course_id != "ss" && af[i].Course_id != "103")
+                {
+                    if (af[i].Course_id == cid)
+                    {
+                        fc_id = af[i].Faculty_id;
+                        break;
+                    }
+                }
+
+            }
+
+            return fc_id;
+        }
+        [HttpPost]
+        public async Task<IActionResult> generate_initial(generate_initial gl)
+        {   
+            Console.WriteLine(gl.s_year);
+            Console.WriteLine(gl.section);
+            List<List<string>> te= new List<List<string>>();
+            te=retrive_data(gl.s_year, gl.batch_start_year, gl.section, gl.semester_id);
+            var fac = mvcDemoDbContext.Faculty_details.FromSqlRaw($"select * from [Faculty_details] where  faculty_id ='{_Myglobalfid}'").ToList();
+            var ret = mvcDemoDbContext.tt.FromSqlRaw($"select * from [tt] where department='{fac[0].faculty_dept}'");
+            List<string> n_years = new List<string>() { "I", "II", "III" , "IV" };
+            List<int> n_sections = new List<int>();
+            var ns = mvcDemoDbContext.tt.FromSqlRaw($"select * from [tt] where department='{fac[0].faculty_dept}'").ToList();
+            var af1 = mvcDemoDbContext.allot_faculty.FromSqlRaw($"select Distinct * from [allot_faculty] where S_Year= '{gl.s_year}' and Batch={gl.batch_start_year} and Section='{gl.section}' and Semester={gl.semester_id} and Department='{fac[0].faculty_dept}'").ToList();
+            List<string>ommitingsubs= new List<string>();
+            var c_details = mvcDemoDbContext.Course_details.FromSqlRaw($"select * from [Course_details] where  P>0 or Course_type= 102 or Course_type=108 or course_type=101 or course_type=103 and Department ='{fac[0].faculty_dept}' ").ToList();
+            Console.WriteLine("all_facccccc" + af1.Count);
+            List<List<string>> tfa = new List<List<string>>();          
+            List<List<tt>> groups=new List<List<tt>>();
+            for(int i=0;i<ns.Count;i+=60)
+            {
+                List<tt> group = ns.GetRange(i, Math.Min(60, ns.Count - i));
+                groups.Add(group);
+            }         
+         for(int i=0;i<c_details.Count;i++)
+            {
+                ommitingsubs.Add(c_details[i].Course_id);
+            }
+            ommitingsubs.Add("102");
+            ommitingsubs.Add("101");
+            ommitingsubs.Add("103");
+            ommitingsubs.Add("104");
+            ommitingsubs.Add("105");
+            ommitingsubs.Add("106");
+            ommitingsubs.Add("107");
+            ommitingsubs.Add("108");
+            Console.WriteLine("all_fac" + af1[0].Course_id);
+            int lvo = 0;
+            for(int i=0;i<6;i++)
+            {
+                for(int j=0;j<10;j++)
+                {
+                    if (te[i][j]=="NA")
+                    {
+                        lvo++;
+                    }
+                }
+            }
+            Console.WriteLine("LVOOO" + lvo);
+            for(int i=0;i<af1.Count;i++)
+            {   
+                Console.WriteLine(af1[i].Course_id);
+            }    
+            if(ret.Count()==0)
+            {
+                Console.WriteLine("Inside if statement");
+                int k = 0;
+                for (int i = 0; i < 6; i++)
+                {
+                        for (int j = 0; j < 10; j++)
+                    {
+                        if (te[i][j]=="NA")
+                        {   
+                            while(true)
+                            { if(k>=af1.Count)
+                                {
+                                    k = 0;
+                                }
+                                if (ommitingsubs.Contains(af1[k].Course_id))
+                                {
+                                    k++;
+                                }
+                                else
+                                {
+                                    te[i][j] = af1[k].Course_id;
+                                    k++;
+                                    break;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.Write(te[i][j] + '\t');
+                    }
+                    Console.WriteLine();
+                }
+                for (int i = 0; i < ommitingsubs.Count; i++)
+                {
+                    Console.WriteLine(ommitingsubs[i]);
+                }
+                while (true)
+                {
+                    if (Check(te,ommitingsubs,tfa,groups) == true)
+                    {
+                        shuffle(te, ommitingsubs);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (i == 0)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "monday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+
+                        }
+                        else if (i == 1)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "tuesday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else if (i == 2)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "wednesday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else if (i == 3)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "thursday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else if (i == 4)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "friday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "saturday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.WriteLine(te[i][j] + '\t');
+                    }
+                    Console.WriteLine('\n');
+                }
+            }
+            else {
+
+                int k = 0;
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (te[i][j] == "NA")
+                        {
+                            while (true)
+                            {
+                                if (k >= af1.Count)
+                                {
+                                    k = 0;
+                                }
+                                if (ommitingsubs.Contains(af1[k].Course_id))
+                                {
+                                    k++;
+                                }
+                                else
+                                {
+                                    te[i][j] = af1[k].Course_id;
+                                    k++;
+                                    break;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+                Console.WriteLine(te.Count);
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.Write(te[i][j] + '\t');
+                    }
+                    Console.WriteLine();
+                }
+                for (int i = 0; i < 6; i++)
+                {   List<string> kgf= new List<string>();
+                    for (int j = 0; j < 10; j++)
+                    {
+                        kgf.Add(te[i][j].ToString());
+                    }
+                    tfa.Add(kgf);
+                }
+                
+                for (int i = 0; i < ommitingsubs.Count; i++)
+                {
+                    Console.WriteLine(ommitingsubs[i]);
+                }
+                while (true)
+                {
+                    if (Check(te, ommitingsubs, tfa, groups) == true)
+                    {
+                        shuffle(te, ommitingsubs);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (i == 0)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "monday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+
+                        }
+                        else if (i == 1)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "tuesday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else if (i == 2)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "wednesday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else if (i == 3)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "thursday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else if (i == 4)
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "friday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                        else
+                        {
+                            int c = mvcDemoDbContext.tt.Count();
+                            Console.WriteLine(c);
+                            tt clg = new tt
+                            {
+                                sno = c + 1,
+                                semester_id = gl.semester_id,
+                                batch_start_year = gl.batch_start_year,
+                                year_s = gl.s_year,
+                                slot = j + 1,
+                                day_tt = "saturday",
+                                course_id = te[i][j],
+                                department = fac[0].faculty_dept,
+                                section = gl.section,
+                                faculty_id = get_facultyid(te[i][j], af1)
+                            };
+                            mvcDemoDbContext.tt.Add(clg);
+                            mvcDemoDbContext.SaveChanges();
+                        }
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.WriteLine(te[i][j] + '\t');
+                    }
+                    Console.WriteLine('\n');
+                }
+            }
+
+            
+
+            return View();
         }
         public IActionResult allotlab_redirect()
         {
@@ -2330,7 +3300,6 @@ namespace TTGenerator.Controllers
                         };
                         mvcDemoDbContext.clg_tt_level.Add(clg);
                         mvcDemoDbContext.SaveChanges();
-
                     }
                 }
             }

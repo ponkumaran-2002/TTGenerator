@@ -1,0 +1,60 @@
+﻿@model TTGenerator.Models.generate_initial
+<html>
+<head>
+    <script type="text/javascript">
+
+    </script>
+</head>
+
+<body>
+    @using (Html.BeginForm("generate_initial", "Home", FormMethod.Post))
+    {
+        <label>
+            <h1>
+                Year
+                <select id="year" asp-for="s_year">
+                    <option value="I">I</option>
+                    <option value="II">II</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                </select>
+            </h1>
+            <table id="table1">
+            </table>
+        </label>
+        <label>
+            <h1>
+                Semester_id
+                <select id="semester" asp-for="semester_id">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                </select>
+            </h1>
+        </label>
+        <label>
+            <h1>
+                Batch_start_year
+                <input type="number" id="batch_start_year" asp-for="batch_start_year" />
+            </h1>
+        </label>
+        <label>
+            <h1>
+                Section
+                <select id="sec" asp-for="section">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </h1>
+        </label>
+        <input type="submit" />
+    }
+</body>
+</html>
